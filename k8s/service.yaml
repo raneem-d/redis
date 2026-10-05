@@ -5,7 +5,8 @@ metadata:
 spec:
   selector:
     app: python-api
-  type: ClusterIP
+  type: NodePort
   ports:
     - port: 80
       targetPort: 8000
+      nodePort: 30080

@@ -8,6 +8,10 @@ nodes:
         hostPort: 80
         protocol: TCP
 
+      - containerPort: 30080
+        hostPort: 30080
+        protocol: TCP
+
     kubeadmConfigPatches:
       - |
         kind: InitConfiguration
