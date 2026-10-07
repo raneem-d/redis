@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: python-api
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: python-api
@@ -14,12 +14,12 @@ spec:
     spec:
       containers:
         - name: python-api
-          image: python-api:latest
-          imagePullPolicy: Never
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: 8000
           env:
             - name: REDIS_HOST
               value: "redis"
             - name: REDIS_PORT
-              value: "6379"
+              value: "{{ .Values.redis.port }}"

@@ -1,0 +1,26 @@
+replicaCount: 1
+
+image:
+  repository: python-api
+  tag: latest
+  pullPolicy: Never
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8000
+
+redis:
+  image:
+    repository: redis
+    tag: "7"
+  port: 6379
+
+ingress:
+  enabled: true
+  className: nginx
+  host: localhost
+  path: /api/?(.*)
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
